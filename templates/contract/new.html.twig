@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Contract{% endblock %}
+
+{% block body %}
+    <h1>Create new Contract</h1>
+
+    {{ include('contract/_form.html.twig') }}
+
+    <a href="{{ path('contract_index',{'id':user.id}) }}">back to list</a>
+{% endblock %}

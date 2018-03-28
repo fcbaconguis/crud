@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contract List{% endblock %}
+
+{% block body %}
+    <h1>Contract List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Owner</th>
+                <th>File Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.user.fullname }}</td>
+                <td>{{ contract.name }}</td>
+                <td>
+                    <a href="{{ path('contract_sign', {'user_id': contract.user.id,'id': contract.id,'page':'1'}) }}">sign</a>
+                    <a href="{{ path('contract_show', {'user_id': contract.user.id,'id': contract.id}) }}">view</a>
+                    <a href="{{ path('contract_edit', {'user_id': contract.user.id,'id': contract.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">Back to User List</a>
+{% endblock %}

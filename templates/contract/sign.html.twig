@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contract Signing Area{% endblock %}
+
+{% block body %}
+	<h1>Contract Signing Area</h1>
+	<div id="signature-pad">
+		<canvas id="my-canvas" width=900 height=1200>Your browser doesn't include support for the canvas element.</canvas>
+
+		<button data-action=clear>Clear</button>
+		<button data-action=save>Save</button>
+	</div>
+{% endblock %}
+
+
+{% block javascripts %}
+{{parent()}}
+
+<script> var filePath = "{{data.filePath}}";</script>
+<script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
+{% endblock %}
