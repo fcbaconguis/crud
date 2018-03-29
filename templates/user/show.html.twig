@@ -5,30 +5,30 @@
 {% block body %}
     <h1>User</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
-            <tr>
+            <tr class="row">
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
-            <tr>
+            <tr class="row">
                 <th>Fullname</th>
                 <td>{{ user.fullname }}</td>
             </tr>
-            <tr>
+            <tr class="row">
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
-            <tr>
+            <tr class="row">
                 <th>Birtday</th>
                 <td>{{ user.birthday ? user.birthday|date('d/M/Y') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a class="btn btn-default btn-xs pull-left" href="{{ path('user_index') }}">Back to List</a>    
 
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+    <a class="btn btn-primary btn-xs pull-right" href="{{ path('user_edit', {'id': user.id}) }}">Edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

@@ -7,5 +7,5 @@
 
     {{ include('contract/_form.html.twig') }}
 
-    <a href="{{ path('contract_index',{'id':user.id}) }}">back to list</a>
+    <a class="btn btn-default btn-xs pull-left" href="{{ path('contract_index',{'id':user.id}) }}">Back to List</a>
 {% endblock %}

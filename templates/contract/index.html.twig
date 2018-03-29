@@ -5,32 +5,33 @@
 {% block body %}
     <h1>Contract List</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="row">
                 <th>Owner</th>
                 <th>File Name</th>
-                <th>Actions</th>
+                <th width=142>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for contract in contracts %}
-            <tr>
+            <tr class="row">
                 <td>{{ contract.user.fullname }}</td>
                 <td>{{ contract.name }}</td>
                 <td>
-                    <a href="{{ path('contract_sign', {'user_id': contract.user.id,'id': contract.id,'page':'1'}) }}">sign</a>
-                    <a href="{{ path('contract_show', {'user_id': contract.user.id,'id': contract.id}) }}">view</a>
-                    <a href="{{ path('contract_edit', {'user_id': contract.user.id,'id': contract.id}) }}">edit</a>
+                    {{ include('contract/_delete_form.html.twig') }}
+                    <a class="btn btn-primary btn-xs" href="{{ path('contract_sign', {'user_id': contract.user.id,'id': contract.id,'page':'1'}) }}">Sign</a>
+                    <a class="btn btn-info btn-xs" href="{{ path('contract_show', {'user_id': contract.user.id,'id': contract.id}) }}">View</a>
+
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="row">
                 <td colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">Back to User List</a>
+    <a class="btn btn-default btn-xs" href="{{ path('user_index') }}">Back to User List</a>
 {% endblock %}

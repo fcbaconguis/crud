@@ -14,12 +14,6 @@ class IndexController extends Controller {
 	public function number()
     {
         echo phpinfo();
-        /*
-        $number = mt_rand(0, 100);
-
-        return $this->render('index/index.html.twig', array(
-            'number' => $number,
-        ));*/
     }
 
 }

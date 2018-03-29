@@ -4,18 +4,30 @@
 
 {% block body %}
 	<h1>Contract Signing Area</h1>
-	<div id="signature-pad">
-		<canvas id="my-canvas" width=900 height=1200>Your browser doesn't include support for the canvas element.</canvas>
-
-		<button data-action=clear>Clear</button>
-		<button data-action=save>Save</button>
+	<div id="signature-pad" class="text-center">
+		<canvas id="my-canvas" width=800 height=1200>Your browser doesn't include support for the canvas element.</canvas>		
 	</div>
+
+	<div>
+		<button class="btn btn-default btn-xs pull-left" data-action=back>Back to Contract List</button>
+		<button class="btn btn-default btn-xs pull-left" data-action=clear>Clear</button>
+		<button class="btn btn-success btn-xs pull-right" data-action=save>Save</button>
+	</div>
+	<div class="text-center" id="page-buttons"></div>
+	
 {% endblock %}
 
 
 {% block javascripts %}
 {{parent()}}
 
-<script> var filePath = "{{data.filePath}}";</script>
+<script> 
+	var filePath 	= "{{data.filePath}}";
+	var page 		= {{data.page}};
+	var totPage 	= {{data.totPage}};
+	var contract_id = "{{data.contract_id}}";
+	var user_id 	= "{{data.user_id}}";
+	var submit_url	= "{{app.request.getSchemeAndHttpHost()}}{{path('save_signed_image')}}";
+</script>
 <script type="text/javascript" src="{{ asset('build/js/sign.js') }}"></script>
 {% endblock %}

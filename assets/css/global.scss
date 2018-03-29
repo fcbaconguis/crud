@@ -5,3 +5,12 @@ $brand-primary: darken(#428bca, 20%);
 
 // the ~ allows you to reference things in node_modules
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+
+a.spacing{
+	margin:0px 5px;
+}
+
+canvas#my-canvas{
+	border: 1px solid;
+}

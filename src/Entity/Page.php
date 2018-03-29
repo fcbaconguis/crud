@@ -18,7 +18,7 @@ class Page
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Contract", inversedBy="pages", cascade={"persist"})
-     * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", nullable=true, onDelete="cascade")
+     * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", nullable=true, onDelete="set null")
      */
     private $contract;
 
@@ -26,6 +26,11 @@ class Page
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $signed_page;
 
     /**
      * @ORM\Column(type="integer")
@@ -51,6 +56,18 @@ class Page
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSignedPage(): ?string
+    {
+        return $this->signed_page;
+    }
+
+    public function setSignedPage(string $signed_page): self
+    {
+        $this->signed_page = $signed_page;
 
         return $this;
     }

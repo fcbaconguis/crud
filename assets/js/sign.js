@@ -30,29 +30,37 @@ $(document).ready(function() {
                 }
         ctx.drawImage(backg.img, backg.x, backg.y, backg.img.width, backg.img.height);
 
-        action(canvas, ctx, background);
+        action(canvas, ctx, background, user_id,contract_id,page, submit_url);
     };
 
     background.src = filePath;
 
-});
+    for(i = 1; i <=totPage; i++) {
 
-function action(canvas, ctx, background) {
-
-        //// Then continue with your code 
-        var wrapper = document.getElementById("signature-pad"),
-            clearButton = wrapper.querySelector("[data-action=clear]"),
-            saveButton = wrapper.querySelector("[data-action=save]");
-
-        function resizeCanvas() {
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
+        var ahref = "#";
+        if(i != page) {
+            ahref = "/contracts/"+user_id+"/"+contract_id+"/sign/page/"+i;
         }
 
-        //window.onresize = resizeCanvas;
-        resizeCanvas();
+        var btn = $('<a/>', {
+            text: i,
+            id: 'page_btn_'+i,
+            class: 'btn btn-default btn-xs spacing',
+            href: ahref
+        });
+
+        $("#page-buttons").append(btn);
+    }
+
+});
+
+function action(canvas, ctx, background, user_id, contract_id, page_num, submit_url) {
+
+        //// Then continue with your code 
+        var wrapper     = document.getElementById("signature-pad"),
+            backButton  = document.querySelector("[data-action=back]"),
+            clearButton = document.querySelector("[data-action=clear]"),
+            saveButton  = document.querySelector("[data-action=save]");
 
         var signaturePad = new SignaturePad(canvas);
         var backg = {
@@ -62,20 +70,33 @@ function action(canvas, ctx, background) {
                 }
         ctx.drawImage(backg.img, backg.x, backg.y, backg.img.width, backg.img.height);
 
+        backButton.addEventListener("click", function(event) {
+            location.href="/contracts/"+user_id;
+        });
         clearButton.addEventListener("click", function(event) {
             signaturePad.clear();
-            action(canvas, ctx, background);
+            action(canvas, ctx, background, user_id, contract_id, page, submit_url);
         });
 
         saveButton.addEventListener("click", function(event) {
             if (signaturePad.isEmpty()) {
                 alert("signaturePad is empty");
             } else {
-                //document.getElementById("hfSign").value = signaturePad.toDataURL();
+
+                var image_base_64 = signaturePad.toDataURL("image/jpeg");
+                $.post(submit_url,{contract_id:contract_id,page_num:page_num,image_base_64:image_base_64}, function(d){
+                    if (d.status == "true")
+                    {
+                        alert("Your signature has been saved, do it again to replace the existing signature\n" + 
+                            "You can view the final file on the list of contracts");
+                    }
+                },"json");
+
+                /*
                 var signedImage = new Image();
                 signedImage.src = signaturePad.toDataURL("image/jpeg");
                 var w = window.open("");
-                w.document.write(signedImage.outerHTML);
+                w.document.write(signedImage.outerHTML);*/
 
             }
         });

@@ -22,7 +22,7 @@ class Contract
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="contracts", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="cascade")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="set null")
      */
     private $user;
 
@@ -30,6 +30,11 @@ class Contract
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name_final;
 
     /**
      * @ORM\Column(type="datetime")
@@ -68,6 +73,18 @@ class Contract
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getNameFinal(): ?string
+    {
+        return $this->name_final;
+    }
+
+    public function setNameFinal(string $name_final): self
+    {
+        $this->name_final = $name_final;
 
         return $this;
     }

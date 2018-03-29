@@ -28,7 +28,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
+    
 vich_uploader:
     db_driver: orm # or mongodb or propel or phpcr
 
@@ -39,5 +39,7 @@ vich_uploader:
             namer: Vich\UploaderBundle\Naming\OrignameNamer
             
             inject_on_load: false
-            delete_on_update: true
-            delete_on_remove: true
+            delete_on_update: false
+            delete_on_remove: false
+twig:
+    form_themes: ['bootstrap_4_layout.html.twig']

@@ -33,17 +33,5 @@ class ContractRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
 
-    /*
-    public function findOneBySomeField($value): ?Contract
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -5,9 +5,9 @@
 {% block body %}
     <h1>User List</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
-            <tr>
+            <tr class="row">
                 <th>User ID</th>
                 <th>Full Name</th>
                 <th>Email</th>
@@ -17,16 +17,16 @@
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
+            <tr class="row">
                 <td>{{ user.id }}</td>
                 <td>{{ user.fullname }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.birthday ? user.birthday|date('d/M/Y') : '' }}</td>
                 <td>                    
-                    <a href="{{ path('contract_new', {'id': user.id}) }}">add contract</a> | 
-                    <a href="{{ path('contract_index', {'id': user.id}) }}">view contract</a> | 
-                    <a href="{{ path('user_show', {'id': user.id}) }}">view</a> | 
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-primary btn-xs" href="{{ path('contract_new', {'id': user.id}) }}">Add contract</a>
+                    <a class="btn btn-info btn-xs" href="{{ path('contract_index', {'id': user.id}) }}">View contracts</a>
+                    <a class="btn btn-info btn-xs" href="{{ path('user_show', {'id': user.id}) }}">View</a>
+                    <a class="btn btn-primary btn-xs" href="{{ path('user_edit', {'id': user.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_new') }}">Create new</a>
+    <a class="btn btn-default btn-xs pull-left" href="{{ path('user_new') }}">Create new</a>
 {% endblock %}

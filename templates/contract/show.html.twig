@@ -5,22 +5,23 @@
 {% block body %}
     <h1>Contract</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
-            <tr>
+            <tr class="row">
                 <th>Id</th>
                 <td>{{ contract.id }}</td>
             </tr>
-            <tr>
+            <tr class="row"> 
                 <th>Name</th>
                 <td>{{ contract.name }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('contract_index', {'id': contract.user.id}) }}">back to list</a>
+    <embed src="{{contract.nameFinal!="" ? contractFinal : vich_uploader_asset(contract, 'contractFile')}}" width="1200" height="800" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
 
-    <a href="{{ path('contract_edit', {'id': contract.id}) }}">edit</a>
+
+    <a class="btn btn-default btn-xs pull-left" href="{{ path('contract_index', {'id': contract.user.id}) }}">Back to List</a>
 
     {{ include('contract/_delete_form.html.twig') }}
 {% endblock %}
